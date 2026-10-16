@@ -153,6 +153,58 @@ textarea.fld{height:84px;padding:10px 12px;resize:vertical}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 @media(max-width:700px){.list .card.adm{grid-template-areas:"ico body pin" "links links links" "tools tools tools"}}
 @media(max-width:480px){.row2{grid-template-columns:1fr}.lrow{grid-template-columns:1fr}}
+
+/* ---- polish v3 ---- */
+dialog{margin:auto}
+dialog[open]{animation:pop .24s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}}
+dialog[open].shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+.auth{width:min(410px,92vw)}
+.auth form{display:block;padding:0}
+.authhead{text-align:center;color:#fff;padding:30px 24px 26px;background:radial-gradient(90% 120% at 80% -20%,#1d8fe8 0,transparent 60%),linear-gradient(135deg,#061636,#0a3a8c)}
+.alogo{width:78px;height:78px;margin:0 auto 14px;border-radius:20px;background:#fff;overflow:hidden;box-shadow:0 12px 28px -10px rgba(0,0,0,.55)}
+.alogo img{width:100%;height:100%;object-fit:contain;display:block}
+.authhead h3{font-size:22px}
+.authhead p{color:#bcd6ff;font-size:13.5px;margin-top:4px}
+.authbody{display:grid;gap:14px;padding:24px}
+.inp{display:flex;align-items:center;gap:10px;padding:0 8px 0 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);transition:border-color .2s,box-shadow .2s}
+.inp:focus-within{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(31,167,255,.16)}
+.inp>i{color:var(--muted);width:16px;text-align:center}
+.inp .fld{border:0;background:none;height:46px;padding:0;box-shadow:none}
+.eye{border:0;background:none;color:var(--muted);width:34px;height:34px;border-radius:8px;flex:none}
+.eye:hover{color:var(--royal)}
+.btn.wide{width:100%;justify-content:center;height:46px;font-size:15px}
+.linkbtn{justify-self:center;border:0;background:none;color:var(--muted);font-weight:600;font-size:13.5px;padding:2px 10px}
+.linkbtn:hover{color:var(--ink)}
+#editDlg h3{padding-bottom:12px;border-bottom:1px solid var(--line)}
+#editDlg .acts{position:sticky;bottom:0;background:var(--surface);padding-top:12px}
+
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.3px);background-size:22px 22px;-webkit-mask-image:linear-gradient(100deg,#000,transparent 65%);mask-image:linear-gradient(100deg,#000,transparent 65%);pointer-events:none}
+.prog{height:4px;border-radius:4px;background:rgba(255,255,255,.2);margin-top:8px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4cc3ff,#d3f0ff);border-radius:4px;transition:width .7s}
+
+.sticky{position:sticky;top:0;z-index:20;margin:14px -16px 0;padding:8px 16px 4px;transition:background .2s,box-shadow .2s}
+.sticky .bar{margin:0 0 10px}
+.sticky.stuck{background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line),0 12px 24px -18px rgba(7,26,61,.35);padding-bottom:10px}
+.sect{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:22px}
+.sect h2{font:600 18px Sora,sans-serif;letter-spacing:-.2px}
+.sect span{color:var(--muted);font-size:13px}
+.sect+.grid{margin-top:12px}
+
+.ico{background:linear-gradient(145deg,color-mix(in srgb,var(--tone,var(--royal)) 20%,var(--surface)),color-mix(in srgb,var(--tone,var(--royal)) 7%,var(--surface)));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tone,var(--royal)) 22%,transparent)}
+.card:hover{box-shadow:0 18px 34px -18px color-mix(in srgb,var(--tone,var(--royal)) 55%,transparent),0 1px 2px rgba(7,26,61,.06)}
+.grid.enter .card{animation:rise .45s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*35ms)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.totop{position:fixed;right:18px;bottom:20px;width:46px;height:46px;border-radius:50%;border:0;background:var(--royal);color:#fff;box-shadow:0 12px 26px -8px rgba(11,79,179,.75);z-index:30;transition:transform .2s}
+.totop:hover{transform:translateY(-3px)}
+@media(max-width:700px){.sticky{position:static;margin:14px 0 0;padding:0}.sticky.stuck{background:none;box-shadow:none;backdrop-filter:none}}
+
+/* ---- compact centered login (no scroll) ---- */
+dialog.auth{width:min(340px,90vw);max-height:none;overflow:visible;margin:auto}
+dialog.auth form{display:grid;gap:14px;padding:26px}
+dialog.auth h3{text-align:center;font-size:20px}
+dialog.auth .linkbtn{justify-self:center}
 </style>
 </head>
 <body>
@@ -171,7 +223,7 @@ textarea.fld{height:84px;padding:10px 12px;resize:vertical}
   </div>
   <div class="stats" aria-label="Portal summary">
     <div class="stat"><b id="sMods">0</b><span>Checklists</span></div>
-    <div class="stat"><b id="sLinks">0</b><span>Links ready</span></div>
+    <div class="stat"><b id="sLinks">0</b><span>Links ready</span><div class="prog"><i id="sProg"></i></div></div>
     <div class="stat"><b id="sPins">0</b><span>Pinned</span></div>
   </div>
 </header>
@@ -185,6 +237,7 @@ textarea.fld{height:84px;padding:10px 12px;resize:vertical}
   <button class="btn danger" id="resetBtn" type="button"><i class="fa-solid fa-rotate-left"></i> Reset</button>
 </section>
 
+<div class="sticky" id="sticky">
 <section class="bar" aria-label="Search and view options">
   <div class="search">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -203,8 +256,10 @@ textarea.fld{height:84px;padding:10px 12px;resize:vertical}
 </section>
 
 <nav class="chips" id="chips" aria-label="Filter by type"></nav>
+</div>
 <div class="recent" id="recent" hidden></div>
 
+<div class="sect" id="sect"></div>
 <main class="grid" id="grid"></main>
 <div class="empty" id="empty" hidden>
   <i class="fa-solid fa-folder-open"></i>
@@ -216,12 +271,13 @@ textarea.fld{height:84px;padding:10px 12px;resize:vertical}
 <footer id="footer"></footer>
 </div>
 
-<dialog id="loginDlg"><form id="loginForm" autocomplete="off">
-  <h3><i class="fa-solid fa-user-shield"></i> Admin login</h3>
-  <label class="f">Username<input class="fld" id="lUser" required></label>
-  <label class="f">Password<input class="fld" id="lPass" type="password" required></label>
+<dialog id="loginDlg" class="auth"><form id="loginForm" autocomplete="off">
+  <h3>Admin login</h3>
+  <label class="f">Username<input class="fld" id="lUser" required autocomplete="off"></label>
+  <label class="f">Password<input class="fld" id="lPass" type="password" required autocomplete="off"></label>
   <p class="err" id="loginErr" hidden>Wrong username or password.</p>
-  <div class="acts"><button type="button" class="btn" data-close>Cancel</button><button class="btn primary">Login</button></div>
+  <button class="btn primary wide">Login</button>
+  <button type="button" class="linkbtn" data-close>Cancel</button>
 </form></dialog>
 
 <dialog id="editDlg"><form id="editForm" autocomplete="off">
@@ -241,6 +297,7 @@ textarea.fld{height:84px;padding:10px 12px;resize:vertical}
   <div class="acts"><button type="button" class="btn" data-close>Cancel</button><button class="btn primary">Save</button></div>
 </form></dialog>
 
+<button class="totop" id="toTop" aria-label="Back to top" hidden><i class="fa-solid fa-arrow-up"></i></button>
 <div class="toast" id="toast" role="status"></div>
 
 <script>/* Embedded logo (so it always shows, even without Logo.jpeg beside this file). Replace this string to change the logo. */
@@ -334,7 +391,7 @@ const pool = () => admin ? cards : cards.filter(c => !c.hidden);
 const saveCards = () => { store.set('cards', cards); render(); };
 let tt; function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 3500); }
 
-function cardHTML(c) {
+function cardHTML(c, i = 0) {
   const pinned = S.pins.has(c.id), tone = c.tone || c.cats[0];
   const links = Object.entries(c.links).map(([k, u]) => {
     const t = LINK_TYPES[k] || { label: k, icon: 'link' };
@@ -350,7 +407,7 @@ function cardHTML(c) {
     <button data-act="hide" title="${c.hidden ? 'Show to everyone' : 'Hide from everyone'}"><i class="fa-solid fa-eye${c.hidden ? '' : '-slash'}"></i></button>
     <button data-act="dup" title="Duplicate"><i class="fa-regular fa-copy"></i></button>
     <button data-act="del" class="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div>` : '';
-  return `<article class="card t-${tone}${admin ? ' adm' : ''}${c.hidden ? ' is-hidden' : ''}" id="card-${c.id}" data-id="${c.id}">
+  return `<article class="card t-${tone}${admin ? ' adm' : ''}${c.hidden ? ' is-hidden' : ''}" id="card-${c.id}" data-id="${c.id}" style="--i:${Math.min(i, 12)}">
     <span class="ico"><i class="${ic(c.icon)}"></i></span>
     <button class="pin" aria-pressed="${pinned}" aria-label="${pinned ? 'Unpin' : 'Pin'} ${esc(c.title)}" title="${pinned ? 'Unpin' : 'Pin to top'}"><i class="${pinned ? 'fa-solid' : 'fa-regular'} fa-star"></i></button>
     <div class="body"><div class="meta"><span class="num">#${num(c)}</span>${esc(c.tag)}${c.hidden ? '<span class="badge">Hidden</span>' : ''}</div><h2>${esc(c.title)}</h2><p>${esc(c.desc)}</p></div>
@@ -372,9 +429,10 @@ function visible() {
     (S.sort === 'az' ? a.title.localeCompare(b.title) : S.sort === 'recent' ? rank(a) - rank(b) || pos(a) - pos(b) : pos(a) - pos(b)));
 }
 
-function render() {
+function render(animate = false) {
   const list = visible(), q = S.q.trim();
-  $('#grid').className = 'grid' + (S.view === 'list' ? ' list' : '');
+  $('#grid').className = 'grid' + (S.view === 'list' ? ' list' : '') + (animate ? ' enter' : '');
+  if (animate) setTimeout(() => $('#grid').classList.remove('enter'), 900);
   $('#grid').innerHTML = list.map(cardHTML).join('');
 
   const empty = list.length === 0;
@@ -400,6 +458,9 @@ function render() {
   $('#clear').hidden = !q; $('#kbd').hidden = !!q;
   document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === S.view));
   $('#sort').value = S.sort;
+  const fl = filters.find(f => f[0] === S.f);
+  $('#sect').innerHTML = `<h2>${q ? 'Search results' : S.f === 'all' ? 'All checklists' : esc(fl[1])}</h2><span>${list.length} of ${pool().length} shown</span>`;
+  $('#sProg').style.width = (all.length ? all.filter(ready).length / all.length * 100 : 0) + '%';
 
   $('#adminBar').hidden = !admin;
   $('#adminBtn').innerHTML = admin ? '<i class="fa-solid fa-right-from-bracket"></i> Logout' : '<i class="fa-solid fa-user-shield"></i> Admin';
@@ -495,25 +556,25 @@ $('#bannerBtn').addEventListener('click', () => {
 /* ---- admin login ---- */
 $('#adminBtn').addEventListener('click', () => {
   if (admin) { admin = false; ses.set(false); render(); return toast('Logged out'); }
-  $('#loginForm').reset(); $('#loginErr').hidden = true; $('#loginDlg').showModal(); $('#lUser').focus();
+  $('#loginForm').reset(); $('#lPass').type = 'password'; $('#loginErr').hidden = true; $('#loginDlg').showModal(); $('#lUser').focus();
 });
 $('#loginForm').addEventListener('submit', e => {
   e.preventDefault();
   if ($('#lUser').value.trim() === ADMIN.user && $('#lPass').value === ADMIN.pass) {
     admin = true; ses.set(true); $('#loginDlg').close(); render(); toast('Admin mode is on');
-  } else { $('#loginErr').hidden = false; $('#lPass').value = ''; $('#lPass').focus(); }
+  } else { const dlg = $('#loginDlg'); dlg.classList.remove('shake'); void dlg.offsetWidth; dlg.classList.add('shake'); $('#loginErr').hidden = false; $('#lPass').value = ''; $('#lPass').focus(); }
 });
 document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => b.closest('dialog').close()));
 
 /* ---- search, filters, sort, view ---- */
-$('#chips').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b) { S.f = b.dataset.f; render(); } });
+$('#chips').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b) { S.f = b.dataset.f; render(true); } });
 $('#q').addEventListener('input', e => { S.q = e.target.value; render(); });
 $('#q').addEventListener('keydown', e => { if (e.key === 'Escape') clearSearch(); });
 function clearSearch() { S.q = ''; $('#q').value = ''; render(); $('#q').focus(); }
 $('#clear').addEventListener('click', clearSearch);
-$('#reset').addEventListener('click', () => { S.q = ''; S.f = 'all'; $('#q').value = ''; render(); });
-$('#sort').addEventListener('change', e => { S.sort = e.target.value; store.set('sort', S.sort); render(); });
-document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => { S.view = b.dataset.view; store.set('view', S.view); render(); }));
+$('#reset').addEventListener('click', () => { S.q = ''; S.f = 'all'; $('#q').value = ''; render(true); });
+$('#sort').addEventListener('change', e => { S.sort = e.target.value; store.set('sort', S.sort); render(true); });
+document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => { S.view = b.dataset.view; store.set('view', S.view); render(true); }));
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); }
 });
@@ -542,7 +603,18 @@ function applyNotice() {
 $('#noticeClose').addEventListener('click', () => { store.set('dismissed', store.get('notice', PORTAL.notice)); $('#notice').hidden = true; });
 applyNotice();
 
-render();
+
+/* ---- polish: password eye, backdrop close, sticky bar, back to top ---- */
+document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
+const onScroll = () => {
+  const y = window.scrollY;
+  $('#sticky').classList.toggle('stuck', y > $('.hero').offsetHeight + 30);
+  $('#toTop').hidden = y < 700;
+};
+window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+$('#toTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+render(true);
 </script>
 </body>
 </html>
